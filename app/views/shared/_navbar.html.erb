@@ -1,0 +1,52 @@
+<!-- Nav menu with user information -->
+<nav class="navbar border-bottom border-dark navbar-expand-xl navbar-light bg-white pmd-navbar pmd-z-depth fixed-top ps-2">
+  <a class="navbar-brand p-2" href="#">APP Template</a>
+  <div class="collapse navbar-collapse" style="border-left: 1px solid black; height:50px"></div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <%= link_to "Menu 1", root_path, class: "nav-link active" %>
+      </li>
+      <li class="nav-item">
+       <%= link_to "Menu 2", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Menu 3", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Menu 4", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <% if current_user %>
+          <div class="dropdown">
+            <a class="link-secondary dropdown-toggle align-items-center d-flex flex-row" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" data-sidebar="true" aria-expanded="false">
+              <div class="avatar-container">
+                <% if current_user.photo.attached? %>
+                  <%= image_tag current_user.photo, class: "avatar-image" %>
+                <% end %>
+              </div>
+              <%= current_user.name.split(' ').map(&:capitalize).join(' ')%>
+            </a>
+            <ul class="dropdown-menu mt-1" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item">Edit Profile</a>
+              <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" %>
+            </ul>
+          </div>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        <% end %>
+      </li>
+    </ul>
+
+    <div style="height: 50px;" class="dropdown pmd-dropdown pmd-user-info me-0 d-flex">
+      <a style="width: 100%;" class="nav-link pe-2 pt-3 bg-black text-light text-sm" href="#"><strong>Main Action Menu</strong></a>
+    </div>
+  </div>
+
+
+
+<!-- Responsive toggler -->
+<button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+</nav>
